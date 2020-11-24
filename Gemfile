@@ -48,4 +48,6 @@ gem "faker", "~> 2.14"
 
 gem 'rest-client'
 
+gem 'dotenv-rails'
+
 
