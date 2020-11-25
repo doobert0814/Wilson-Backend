@@ -43,6 +43,7 @@ ActiveRecord::Schema.define(version: 2020_11_19_035347) do
     t.string "username"
     t.string "email"
     t.string "password_digest"
+    t.boolean "redirect"
     t.integer "follower_id"
     t.integer "followed_id"
     t.datetime "created_at", precision: 6, null: false
