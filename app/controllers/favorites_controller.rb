@@ -21,17 +21,11 @@ class FavoritesController < ApplicationController
         else
             render json: {error: "couldnt save, please try again"}
         end
-        # byebug
-        # if Movie.find(params[:favorite][:movie_id]) && User.find(params[:favorite][:user-id])
-        #     new_favorite = Favorite.create(favorite_params)
-        # else
-        #     new_favorite = favorite_params
-        # end
-        # render json: new_favorite
     end
 
     def destroy
         favorite = Favorite.find(params[:id])
+        byebug
         favorite.destroy
         render json: favorite
     end
