@@ -8,5 +8,6 @@ require 'rest-client'
 #   Character.create(name: 'Luke', movie: movies.first)
 # Movie.destroy_all
 User.destroy_all
+Favorite.destroy_all
 
 puts "CLEARED"
