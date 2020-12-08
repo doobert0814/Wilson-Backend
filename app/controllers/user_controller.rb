@@ -1,18 +1,33 @@
 class UserController < ApplicationController
-    before_action :authorized
+    skip_before_action :authorized, only: [:create, :index, :show]
+
+    def index
+        # user = User.all 
+        if params[:email]
+        user1 = User.find_by(email: params['email'])
+        elsif params[:username]
+            user1 = User.find_by(username: params['username'])
+
+        end
+
+        if user1
+            render json: user1
+        else
+            render json: {error: "unable to find user"}
+        end
+    end
 
     def show 
-        user = User.find(params[:id])
+        user = User.find(email: params['email'])
         render json: user
     end
 
     def create 
         user = User.new(user_params)
-        byebug
         if user.save
             token = encode_token(user_id: user.id)
-            render json: { user: user.to_json(except: [:created_at, :updated_at, :password_digest]), jwt: token }, status: :created
-            byebug
+            render json: { user: user, jwt: token }
+            
         else
             render json: { errors: user.errors.full_messages }, status: :not_acceptable
         end
@@ -21,9 +36,6 @@ class UserController < ApplicationController
     private
 
     def user_params
-        byebug
-        params.require(:user).permit!
-        # (:name, :email, :username, :password, :redirect)
-        byebug
+        params.require(:user).permit(:name, :email, :username, :password)
     end
 end

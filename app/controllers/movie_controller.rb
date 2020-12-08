@@ -1,5 +1,7 @@
 class MovieController < ApplicationController
 
+    skip_before_action :authorized
+
     API_KEY = ENV['API_KEY']
 
     def index

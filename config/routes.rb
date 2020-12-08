@@ -5,6 +5,7 @@ post '/login', to: 'auth#create'
 post '/users', to: 'user#create'
 
 resources :users
-resources :favorites, only: [:create, :destroy]
+resources :user
+resources :favorites
 resources :sessions, only: [:create, :destroy]
 end
